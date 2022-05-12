@@ -9,8 +9,8 @@ interface ifcPost {
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
   @Post('/create')
-  createItem(@Body() _ifcPost: ifcPost) {
-    return this.todoService.createItem(_ifcPost);
+  create(@Body() _ifcPost: ifcPost) {
+    return this.todoService.create(_ifcPost);
   }
 
   @Get('/all')
@@ -19,20 +19,20 @@ export class TodoController {
   }
 
   @Get('/item/:id')
-  getItem(@Param('id') id: string) {
-    return this.todoService.getItem(id);
+  getById(@Param('id') id: string) {
+    return this.todoService.getById(id);
   }
 
   @Post('/item/:id/status/:status')
-  updateStatusItem(
+  updateStatus(
     @Param('id') id: string,
     @Param('status') status: 'default' | 'done' | 'not-done'
   ) {
-    return this.todoService.updateStatusItem(id, status);
+    return this.todoService.updateStatus(id, status);
   }
 
   @Get('/item/:id/remove')
-  removeItem(@Param('id') id: string) {
-    return this.todoService.removeItem(id);
+  removeById(@Param('id') id: string) {
+    return this.todoService.removeById(id);
   }
 }

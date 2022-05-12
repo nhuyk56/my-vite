@@ -13,17 +13,17 @@ export class TodoService {
   getAll() {
     return this.todoRepository.find()
   }
-  async createItem(todo) {
+  async create(todo) {
     const newPost = await this.todoRepository.create(todo);
     await this.todoRepository.save(newPost);
     return newPost;
   }
 
-  getItem(id) {
+  getById(id) {
     return this.todoRepository.findOne(id);
   }
 
-  async updateStatusItem(
+  async updateStatus(
     id: string,
     status: 'default' | 'done' | 'not-done'
   ) {
@@ -36,7 +36,7 @@ export class TodoService {
     throw new Error(`Not Found id: ${id}`)
   }
 
-  async removeItem(id: string) {
+  async removeById(id: string) {
     const item = await this.todoRepository.findOne(id)
     if (item && item.id) {
       await this.todoRepository.delete(id)
