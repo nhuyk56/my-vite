@@ -1,10 +1,13 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TodoModule } from './module/todo/todo.module';
 // import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { DatabaseModule } from './database.module'
 import { Todo } from './module/todo/todo.entity'
+import { XeDap } from './module/xedap/xedap.module';
+import { XeMay } from './module/xemay/xemay.module';
+import { XeOTo } from './module/xeoto/xeoto.module';
 
 const defaultOptions = {
   type: 'postgres',
@@ -30,7 +33,10 @@ const defaultOptions = {
         PORT: Joi.number().default(3000)
       })
     }),
-    DatabaseModule
+    DatabaseModule,
+    forwardRef(() => XeDap),
+    forwardRef(() => XeMay),
+    forwardRef(() => XeOTo)
   ],
 })
 
